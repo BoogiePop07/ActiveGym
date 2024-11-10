@@ -1,3 +1,53 @@
+<?php
+// login.php
+require_once 'database.php'; // Include your database connection
+
+session_start(); // Start the session
+
+$error = ''; // Initialize error variable
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Check if email and password fields are set
+    $email = isset($_POST['email']) ? $_POST['email'] : '';
+    $password = isset($_POST['password']) ? $_POST['password'] : '';
+
+    // Basic validation
+    if (empty($email) || empty($password)) {
+        $error = "Email and password are required.";
+    } else {
+        // Prepare the SQL statement to check if the user exists in the members table
+        $sql = "SELECT * FROM members WHERE email=?";
+        $stmt = mysqli_prepare($conn, $sql);
+        if ($stmt === false) {
+            die("Error preparing SELECT statement: " . mysqli_error($conn));
+        }
+        mysqli_stmt_bind_param($stmt, "s", $email);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+
+        if (mysqli_num_rows($result) > 0) {
+            // Fetch the user data
+            $user = mysqli_fetch_assoc($result);
+            // Verify the password
+            if (password_verify($password, $user['password'])) {
+                // Password is correct, set session variables
+                $_SESSION['user_id'] = $user['id'];
+                $_SESSION['first_name'] = $user['first_name'];
+                $_SESSION['last_name'] = $user['last_name'];
+                // Redirect to a protected page (e.g., dashboard)
+                header('Location: index.php'); // Ensure you have this page created
+                exit;
+            } else {
+                $error = "Invalid password.";
+            }
+        } else {
+            $error = "No account found with that email.";
+        }
+        mysqli_stmt_close($stmt);
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,32 +60,37 @@
         <div class="sub-header-text">Your fitness journey starts here</div>
         <div class="login-container">
             <h2>Log in</h2>
-            <input type="text" placeholder="Username or Email">
-            <div class="password-container">
-                <input type="password" id="password" placeholder="Password">
-                <i class="fas fa-eye" id="eye-icon" onclick="togglePasswordVisibility()"></i>
-            </div>
-            <a href="forgot-password.php" style="font-size: 12px;">Forgot Password?</a>
-            <a href="verification.php" type="submit"><button>Log In</button></a>
-            <a href="register.php" class="signup-link">New to ActiveGym? Sign up now</a>
+            <?php if (isset($error)): ?>
+                <div style="color: red;"><?= htmlspecialchars($error) ?></div>
+            <?php endif; ?>
+            <form method="POST" action="">
+    <input type="text" name="email" placeholder="Username or Email" required>
+    <div class="password-container">
+        <input type="password" id="password" name="password" placeholder="Password " required>
+        <i class="fas fa-eye" id="eye-icon" onclick="togglePasswordVisibility()"></i>
+    </div>
+                <a href="forgot-password.php" style="font-size: 12px;">Forgot Password?</a>
+                <button type="submit">Log In</button>
+                <a href="register.php" class="signup-link">New to ActiveGym? Sign up now</a>
+            </form>
         </div>
     </div>
 </body>
 <script>
-        function togglePasswordVisibility() {
-            var passwordInput = document.getElementById("password");
-            var eyeIcon = document.getElementById("eye-icon");
-            if (passwordInput.type === "password") {
-                passwordInput.type = "text";
-                eyeIcon.classList.remove("fa-eye");
-                eyeIcon.classList.add("fa-eye-slash");
-            } else {
-                passwordInput.type = "password";
-                eyeIcon.classList.remove("fa-eye-slash");
-                eyeIcon.classList.add("fa-eye");
-            }
+    function togglePasswordVisibility() {
+        var passwordInput = document.getElementById("password");
+        var eyeIcon = document.getElementById("eye-icon");
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            eyeIcon.classList.remove("fa-eye");
+            eyeIcon.classList.add("fa-eye-slash");
+        } else {
+            passwordInput.type = "password";
+            eyeIcon.classList.remove("fa-eye-slash");
+            eyeIcon.classList.add("fa-eye");
         }
-    </script>
+    }
+</script>
 
 </html>
 <style>

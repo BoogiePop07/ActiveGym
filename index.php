@@ -6,97 +6,74 @@
   </title>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
 
-  <body>
-  <div class="navbar">
-   <div class="logo">
-    <img alt="MTFC logo with stylized text" height="400" src="images/MTFC_LOGO.PNG" width="150"/>
-   </div>
-   <ul class="menu">
-    <li>
-     <a href="#">
-      Home
-     </a>
-    </li>
-    <li>
-     <a href="#">
-      About
-     </a>
-    </li>
-    <li>
-     <a href="#">
-      Trainers
-     </a>
-    </li>
-    <li>
-     <a href="#">
-      Pricing
-     </a>
-    </li>
-    <li>
-     <a href="#">
-      Contact
-     </a>
-    </li>
-   </ul>
-   <div class="auth">
-    <a href="login.php">
-     Login
-    </a>
-    <a href="register.php">
-     Register
-    </a>
-    <a href="#">
-     <i class="fas fa-user-circle">
-     </i>
-    </a>
-    </i>
-   </div>
-  </div>
+  <?php include 'header.php'; ?>
+
+<div class="background-image"></div>
+<div class="content">
+    <h1>Manila Total Fitness Center:</h1>
+    <h2>Your Fitness Journey Starts Here</h2>
+    <p>Achieve your fitness goals with personalized plans, real-time availability updates, and a supportive community.</p>
+</div>
+
+
+<?php include 'footer.php'; ?>
+
   <style>
-   body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-        }
-        .navbar {
-            background-color: #666;
-            padding: 10px 0;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        .navbar .logo {
-            margin-left: 20px;
-        }
-        .navbar .logo img {
-            height: 50px; /* Medium size */
-        }
-        .navbar .menu {
-            display: flex;
-            list-style: none;
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #1a202c;
+            color: white;
             margin: 0;
             padding: 0;
         }
-        .navbar .menu li {
-            margin: 0 15px;
+        .background-image {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            background: url('https://storage.googleapis.com/a1aa/image/8vljVJNn4m63NdAMqxWohg5QLCICL7W3hHLq0cpLARO5bq7E.jpg') no-repeat center center/cover;
+            opacity: 0.5;
         }
-        .navbar .menu li a {
-            color: white;
-            text-decoration: none;
-            font-size: 16px;
+        .content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            padding: 0 1rem;
         }
-        .navbar .auth {
-            margin-right: 20px;
+        .content h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+        .content h2 {
+            font-size: 1.5rem;
+            margin-top: 0.5rem;
+        }
+        .content p {
+            margin-top: 1rem;
+            font-size: 1.125rem;
+        }
+        .images {
             display: flex;
-            align-items: center;
+            justify-content: center;
+            margin-top: 2rem;
+            gap: 1rem;
+            padding: 0 1rem;
         }
-        .navbar .auth a {
-            color: white;
-            text-decoration: none;
-            font-size: 16px;
-            margin-right: 10px;
+        .images img {
+            width: 30%;
+            object-fit: cover;
         }
-        .navbar .auth .fa-user-circle {
-            font-size: 30px; 
+        @media (min-width: 768px) {
+            .content h1 {
+                font-size: 4rem;
+            }
+            .content h2 {
+                font-size: 2rem;
+            }
+            .content p {
+                font-size: 1.25rem;
+            }
         }
   </style>
 
