@@ -31,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Verify the password
             if (password_verify($password, $user['password'])) {
                 // Password is correct, set session variables
-                $_SESSION['user_id'] = $user['id'];
+                $_SESSION['member_id'] = $user['member_id'];
                 $_SESSION['first_name'] = $user['first_name'];
                 $_SESSION['last_name'] = $user['last_name'];
                 // Redirect to a protected page (e.g., dashboard)
