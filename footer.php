@@ -9,7 +9,7 @@
   </div>
   <footer class="footer">
    <div class="column logo">
-    <img alt="MTFC logo" height="50" src="https://storage.googleapis.com/a1aa/image/DgyAVAk1SZoDFJ5aAyfwDVK8HEeSJXAdu7hTXpPtqo24qjvTA.jpg" width="100"/>
+    <img alt="MTFC logo" height="50" src="images/MTFC_LOGO.PNG" width="100"/>
     <p>
      Copyright 2024.
      <br/>
@@ -73,13 +73,6 @@
      <i class="fab fa-facebook">
      </i>
     </a>
-    <a href="#">
-     <i class="fab fa-x-twitter">
-     </i>
-    </a>
-    <a href="#">
-     <i class="fab fa-twitter">
-     </i>
     </a>
     <a href="#">
      <i class="fab fa-instagram">
@@ -131,6 +124,6 @@
             color: #cccccc;
         }
         .footer .logo img {
-            width: 100px;
+            width: 130px;
         }
   </style>

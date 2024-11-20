@@ -1,3 +1,19 @@
+<?php
+// Check if a session has already been started
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
+// Check if the user is logged in
+if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
+    // Include header2.php if the user is logged in
+    include 'header2.php'; 
+} else {
+    // Include header.php if the user is not logged in
+    include 'header.php'; 
+}
+?>
+
 <!DOCTYPE html>
 <html>
 <body>
@@ -5,8 +21,6 @@
    MTFC
   </title>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
-
-  <?php include 'header.php'; ?>
 
 <div class="background-image"></div>
 <div class="content">

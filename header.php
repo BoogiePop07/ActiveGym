@@ -1,5 +1,8 @@
 <?php
-session_start(); // Start the session to access session variables
+// Check if a session has already been started
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 
 // Assuming you have a login form that submits to this script
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -56,9 +59,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <img alt="MTFC logo with stylized text" src="images/MTFC_LOGO.PNG" width="150"/>
         </div>
         <ul class="menu">
-            <li><a href="#">Home</a></li>
+            <li><a href="index.php">Home</a></li>
             <li><a href="#">About</a></li>
-            <li><a href="#">Trainers</a></li>
+            <li><a href="trainer.php">Trainers</a></li>
             <li><a href="price.php">Pricing</a></li>
             <li><a href="#">Contact</a></li>
         </ul>
